@@ -71,9 +71,14 @@ sleep 30s
 
 sed -i '10 d' ~/.hostmasternodecore/hostmasternode.conf
 echo "masternodeprivkey=$COINKEY" >> ~/.hostmasternodecore/hostmasternode.conf
+echo "addnode=45.77.145.27" >> ~/.hostmasternodecore/hostmasternode.conf
 echo "addnode=157.230.143.107" >> ~/.hostmasternodecore/hostmasternode.conf
-echo "addnode=188.166.96.144	" >> ~/.hostmasternodecore/hostmasternode.conf
+echo "addnode=188.166.96.144" >> ~/.hostmasternodecore/hostmasternode.conf
 echo "addnode=128.199.249.52" >> ~/.hostmasternodecore/hostmasternode.conf
+echo "addnode=68.183.40.61" >> ~/.hostmasternodecore/hostmasternode.conf
+echo "addnode=138.197.157.37" >> ~/.hostmasternodecore/hostmasternode.conf
+echo "addnode=139.59.68.199" >> ~/.hostmasternodecore/hostmasternode.conf
+
 
 
 cd ~/.hostmasternodecore/
@@ -92,5 +97,16 @@ cd
 ./hostmasternoded
 sleep 20s
 ./hostmasternode-cli getinfo
+
+git clone https://github.com/hmn-dev/sentinel
+sudo apt-get update
+sudo apt-get -y install python-virtualenv
+sudo apt-get install virtualenv -y
+cd sentinel
+virtualenv ./venv
+./venv/bin/pip install -r requirements.txt
+sleep 5s
+crontab 'crontab.txt'
+
 
 echo "${nodeIpAddress}:${Coin_Port} $COINKEY"
